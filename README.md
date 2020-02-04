@@ -4,4 +4,11 @@ This repository will eventually be a clone of the source code for [chat.gab.com]
 
 For now, it's a place to collect issues for the Gab developer team.
 
-If you would like write access to the repository, PM billstclair in Gab Chat or make a Gab post mentioning [@billstclair](https://gab.com/billstclair).
+If you would like write access to the repository, PM billstclair in Gab Chat or make a Gab post mentioning [@billstclair@gab.com](https://gab.com/billstclair).
+
+## Google Docs
+
+Curtis Rock ([@crockwave@gab.com](https://gab.com/crockwave)) has created a pair of Google Docs for collecting Gab Chat issues and wishes. If you prefer that format to entering issues here, you can go to one of:
+
+* [Gab Issues List](https://docs.google.com/document/d/1taloWernh6D7-N_9xA2X3GqfJ1UL5JFb5VeI1_pJ2l0/edit#heading=h.fgsznl4dkv5v)
+* [Gab Wish List](https://docs.google.com/document/d/1aEE7BnJ5oNDLgW5QUHsAPvHLeqdH8LZ-FV2YXMAQtHU/edit)
