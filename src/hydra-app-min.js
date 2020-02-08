@@ -1,5 +1,5 @@
-# https://chat.gab.com/dist/js/hydra-app.min.js?v=0.2.81
-# Formatted by Dissenter's DevTools Sources tab.
+// https://chat.gab.com/dist/js/hydra-app.min.js?v=0.2.81
+// Formatted by Dissenter's DevTools Sources tab.
 
 "use strict";
 (()=>{
