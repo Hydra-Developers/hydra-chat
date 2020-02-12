@@ -1,4 +1,4 @@
-// https://chat.gab.com/dist/js/hydra-app.min.js?v=0.2.81
+// https://chat.gab.com/dist/js/hydra-app.min.js?v=0.2.87
 // Formatted by Dissenter's DevTools Sources tab.
 
 "use strict";
@@ -1111,6 +1111,32 @@ hydra = window.hydra = window.hydra || {};
             }
             )
         }
+        sendRequestChatInvitationStatusMessage(e) {
+            e.preventDefault(),
+            e.stopPropagation();
+            var t = this.getStatusMessageInputText();
+            return this.postStatusMessage(t).then(e=>{
+                if (!e.success)
+                    return Promise.reject(new Error(e.message));
+                hydra.client.showModal({
+                    title: "Invitation request sent",
+                    prompt: e.message,
+                    buttons: [{
+                        label: "Dismiss",
+                        class: "btn-primary",
+                        onclick: ()=>{
+                            window.location = "/"
+                        }
+                    }]
+                })
+            }
+            ).catch(e=>{
+                console.error(e),
+                hydra.client.closeModal(),
+                window.alert(e.message)
+            }
+            )
+        }
         sendStatusMessage(e) {
             e.preventDefault(),
             e.stopPropagation();
@@ -1473,19 +1499,20 @@ hydra = window.hydra = window.hydra || {};
                 if (!t.messages || !t.messages.length)
                     return e.removeScrollSentinel(),
                     Promise.resolve();
-                var o = e.removeScrollSentinel()
-                  , r = e.chatMessageList.scrollTop
-                  , a = e.chatMessageList.scrollHeight;
+                var o = e.scrollSentinelContainer.offsetHeight
+                  , r = e.removeScrollSentinel()
+                  , a = e.chatMessageList.scrollTop
+                  , s = e.chatMessageList.scrollHeight;
                 return t.messages.forEach(t=>{
                     e.scrollSentinelBtn.setAttribute("data-oldest-id", t._id),
                     e.chatMessageList.insertAdjacentHTML("afterbegin", t.message)
                 }
                 ),
                 t.messages.length >= 20 && (e.chatMessageList.prepend(e.scrollSentinelContainer),
-                e.scrollSentinel = o),
+                e.scrollSentinel = r),
                 Promise.all(e.decryptHtmlChatMessages()).then(()=>{
-                    var t = e.chatMessageList.scrollHeight - a;
-                    e.chatMessageList.scrollTop = r + t
+                    var t = e.chatMessageList.scrollHeight - s;
+                    e.chatMessageList.scrollTop = a + t - o
                 }
                 )
             }
@@ -1504,14 +1531,7 @@ hydra = window.hydra = window.hydra || {};
                 void (e.isUserScrolling = !0));
             e.isUserScrolling = !1
         }
-        checkScrollSentinel() {
-            if (this.scrollSentinel) {
-                var e = this.scrollSentinelContainer.getBoundingClientRect()
-                  , t = this.scrollSentinel.getBoundingClientRect().bottom + e.top;
-                this.isFetchingMessages || t < -100 || (this.isFetchingMessages = !0,
-                this.scrollSentinelBtn.click())
-            }
-        }
+        checkScrollSentinel() {}
         removeScrollSentinel() {
             if (this.scrollSentinel) {
                 var e = this.scrollSentinel;
